@@ -10,103 +10,107 @@
 
 
 
-$data_atual = date ('d/m/Y');
-$data_nascimento = date ('d/m/Y', strtotime ('+ 280 days'));
+$data_atual = date ('Y-m-d');
+$data_nascimento = date ('Y-m-d', strtotime ('+ 280 days'));
+
+echo " Hoje é dia " . $data_atual . "<br><br>";
+
+echo "A data provável do nascimento do seu bebê é " . $data_nascimento . "<br><br>"; 
 
 
 $signos = array ();
 $aries = array (
-	'nome'=> 'aries',
-	'data_inicial'=> '21/03/2021',
-	'data_final'=> '20/04/2021'
+	'nome'=> 'Áries',
+	'data_inicial'=> '2021-03-21',
+	'data_final'=> '2021-04-20'
 );
 
 $signos[] = $aries;
 
 $touro = array (
-	'nome'=> 'touro',
-	'data_inicial'=> '21/04/2021',
-	'data_final'=> '20/05/2021'
+	'nome'=> 'Touro',
+	'data_inicial'=> '2021-04-21',
+	'data_final'=> '2021-05-20'
 );
 
 $signos[] = $touro;
 
 $gemeos = array (
-	'nome'=> 'gemeos',
-	'data_inicial'=> '21/05/2021',
-	'data_final'=> '20/06/2021'	
+	'nome'=> 'Gêmeos',
+	'data_inicial'=> '2021-05-21',
+	'data_final'=> '2021-06-20'	
 );
 
-$signos[] = $cancer;
+$signos[] = $gemeos;
 
 $cancer = array (
-	'nome'=> 'gemeos',
-	'data_inicial'=> '21/06/2021',
-	'data_final'=> '22/07/2021'	
+	'nome'=> 'Câncer',
+	'data_inicial'=> '2021-06-21',
+	'data_final'=> '2021-07-22'	
 );
 
 $signos[] = $cancer;
 
 $leao = array (
-	'nome'=> 'leao',
-	'data_inicial'=> '23/07/2021',
-	'data_final'=> '22/08/2021'	
+	'nome'=> 'Leão',
+	'data_inicial'=> '2021-07-23',
+	'data_final'=> '2021-08-22'	
 );
 
 $signos[] = $leao;
 
 $virgem = array (
-	'nome'=> 'virgem',
-	'data_inicial'=> '23/08/2021',
-	'data_final'=> '22/09/2021'	
+	'nome'=> 'Virgem',
+	'data_inicial'=> '2021-08-23',
+	'data_final'=> '2021-09-22'	
 );
 
 $signos[] = $virgem;
 
 $libra = array (
-	'nome'=> 'libra',
-	'data_inicial'=> '23/09/2021',
-	'data_final'=> '22/10/2021'	
+	'nome'=> 'Libra',
+	'data_inicial'=> '2021-09-23',
+	'data_final'=> '2021-10-22'	
 );
 
 $signos[] = $libra;
 
 $escorpiao = array (
-	'nome'=> 'escorpiao',
-	'data_inicial'=> '23/10/2021',
-	'data_final'=> '21/11/2021'	
+	'nome'=> 'Escorpião',
+	'data_inicial'=> '2021-10-23',
+	'data_final'=> '2021-11-21'	
 );
 
 $signos[] = $escorpiao;
 
 $sagitario = array (
-	'nome'=> 'sagitario',
-	'data_inicial'=> '22/11/2021',
-	'data_final'=> '21/12/2021'	
+	'nome'=> 'Sagitário',
+	'data_inicial'=> '2021-11-22',
+	'data_final'=> '2021-12-21'	
 );
 
 $signos[] = $sagitario;
 
 $capricornio = array (
-	'nome'=> 'capricornio',
-	'data_inicial'=> '22/12/2021',
-	'data_final'=> '19/01/2021'	
+	'nome'=> 'Capricórnio',
+	'data_inicial'=> '2021-12-22',
+	'data_final'=> '2021-01-19'	
 );
 
 $signos[] = $capricornio;
 
 $aquario = array (
-	'nome'=> 'aquario',
-	'data_inicial'=> '20/01/2021',
-	'data_final'=> '18/02/2021'	
+	'nome'=> 'Aquário',
+	'data_inicial'=> '2021-01-20',
+	'data_final'=> '2021-02-18'	
 );
 
 $signos[] = $aquario;
 
 $peixes = array (
-	'nome'=> 'peixes',
-	'data_inicial'=> '19/02/2021',
-	'data_final'=> '20/03/2021'	
+	'nome'=> 'Peixes',
+	'data_inicial'=> '2021-02-19',
+	'data_final'=> '2021-03-20'	
 );
 
 $signos[] = $peixes;
@@ -114,14 +118,35 @@ $signos[] = $peixes;
 //var_dump($signos);
 //exit;
 
+$nascimento = new DateTime($data_nascimento);
+$ano_nascimento = $nascimento->format('Y');
+
+foreach($signos as $signo){
 
 
- echo " Hoje é dia " . $data_atual . "<br><br>";
 
- echo "A data provável do nascimento do seu bebê é " . $data_nascimento . "<br><br>"; 
+	$inicio = new DateTime($signo['data_inicial']);
+	$dia_inicio = $inicio->format('d');
+	$mes_inicio = $inicio->format('m');
+	$data_inicial_formatada = new DateTime($ano_nascimento.'-'.$mes_inicio.'-'.$dia_inicio);
 
- echo "Se você engravidar hoje o signo do seu bebê será: ";
 
+	$fim = new DateTime($signo['data_final']);
+	$data_final_formatada = new DateTime($nascimento->format('Y').'-'.$fim->format('m').'-'.$fim->format('d'));
+
+	if ($nascimento >= $data_inicial_formatada && $nascimento <= $data_final_formatada){
+		echo "Se você engravidar hoje o signo do seu bebê será: ${signo['nome']}";
+	}
+
+
+	// $data_inicial_formatada = new DateTime($nascimento->format('Y').'-'.$inicio->format('m').'-'.$inicio->format('d'));
+	// echo $data_inicial_formatada->format('d/m/Y');
+
+
+
+}
+
+ 
 ?>
 </body>
 </html>	
