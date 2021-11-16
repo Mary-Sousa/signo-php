@@ -13,9 +13,9 @@
 $data_atual = date ('Y-m-d');
 $data_nascimento = date ('Y-m-d', strtotime ('+ 280 days'));
 
-echo " Hoje é dia " . $data_atual . "<br><br>";
+echo " Hoje é dia " . date('d/m/Y',  strtotime($data_atual)) . "<br><br>";
 
-echo "A data provável do nascimento do seu bebê é " . $data_nascimento . "<br><br>"; 
+echo "A data provável do nascimento do seu bebê é: " . date('d/m/Y',  strtotime($data_nascimento)) . "<br><br>"; 
 
 
 $signos = array ();
